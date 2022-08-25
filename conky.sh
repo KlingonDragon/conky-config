@@ -1,3 +1,4 @@
+sleep 5
 conky -c ~/.conky/klingondragon.conf &
 conky -c ~/.conky/spotify/spotify.conf &
 conky -c ~/.conky/spotify/image.conf &

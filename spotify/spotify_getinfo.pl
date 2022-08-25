@@ -88,4 +88,6 @@ if ($current_track_status eq "Playing") {
         print "Looping ".$current_loop_status;
     }
     print "\${color #00ff00}\${font :pixelsize=2}\n\$hr";
+} else {
+    print $current_track_status;
 }
