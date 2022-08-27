@@ -48,7 +48,7 @@ $current_track_arturl = $metadata{'mpris:artUrl'};
 $current_track_title = $metadata{'xesam:title'};
 
 my @artist_list = @{$metadata{'xesam:artist'}};
-my $current_track_artists = join('\n', @artist_list);
+my $current_track_artists = join('\n\${alignr}', @artist_list);
 # Store the current track
 open(FILE,'<'.$conky_directory."stored_track.txt") or die "open: ".$!;
 $row = <FILE>;
@@ -75,9 +75,9 @@ if ($current_track_status ne "Playing") {
     print "\$color\${alignr}$current_track_status\${color #1DB954}";
 }
 print "\${font :pixelsize=2}\n\$hr\n\$font\$color";
-print "\${alignr}$current_track_title";
+print "\${alignr}".substr($current_track_title, 0, 40);
 print "\n\${alignr}$current_track_artists";
-print "\n\${alignr}".$metadata{'xesam:album'};
+print "\n\${alignr}".substr($metadata{'xesam:album'}, 0, 40);
 my $track_pos = $interface->Get("org.mpris.MediaPlayer2.Player", "Position");
 my $track_len = $metadata{'mpris:length'};
 print "\n\${font}".strftime("%T", gmtime($track_pos/1000000))."  \${alignr}  ".strftime("%T", gmtime($track_len/1000000));
