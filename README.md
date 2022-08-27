@@ -67,7 +67,8 @@ Configuration assumes all these files are in the `~/.conky` directory (e.g. `con
 LOCATION="London"
 ```
 If these files are stored elsewhere, you will need to make more changes to the configuration files.
-### Multiple monitors
-[`conky.sh`](conky.sh) starts conky 6 times. The second 3 are for my second monitor.
+## Multiple monitors
+[`startup.py`](startup.py) starts conky 3 or 6 times.
+All 3 configuration files have copies that set the monitor to 2 and window type to panel. `startup.py` runs these second files if it finds multiple monitors else it just runs the normal ones
 
 Feel free to remove these if you only have one monitor or only want it on one. If you only want it on one monitor but want to change which monitor is used you can add `xinerama_head = ?` to the config options of each `.conf` file replacing `?` with the number of the monitor you wish to use
