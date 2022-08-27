@@ -70,24 +70,24 @@ if ($stored_current_track ne $current_track_title ) {
     getstore($current_track_arturl, $conky_directory."current_artwork.jpg");
 }
 # Print track information on conky
-if ($current_track_status eq "Playing") {
-    print "\$alignc\${color #00ff00}\${font :pixelsize=20}Spotify\${font :pixelsize=2}\n\$hr\n\$font\$color";
-    print "\${alignr}$current_track_title";
-    print "\n\${alignr}$current_track_artists";
-    print "\n\${alignr}".$metadata{'xesam:album'};
-    my $track_pos = $interface->Get("org.mpris.MediaPlayer2.Player", "Position");
-    my $track_len = $metadata{'mpris:length'};
-    print "\n\${font}".strftime("%T", gmtime($track_pos/1000000))."  \${alignr}  ".strftime("%T", gmtime($track_len/1000000));
-    print "\n\${execbar ".$conky_directory."bar.sh $track_pos $track_len}";
-    print "\${font :pixelsize=12}\n";
-    if ($current_shuffle_status) {
-        print "Shuffling Playlist";
-    } 
-    print "  \${alignr}  ";
-    if ($current_loop_status ne "None") {
-        print "Looping ".$current_loop_status;
-    }
-    print "\${color #00ff00}\${font :pixelsize=2}\n\$hr";
-} else {
-    print $current_track_status;
+print "\$alignc\${color #00ff00}\${font :pixelsize=20}Spotify";
+if ($current_track_status ne "Playing") {
+    print "\$color\${alignr}$current_track_status\${color #00ff00}";
 }
+print "\${font :pixelsize=2}\n\$hr\n\$font\$color";
+print "\${alignr}$current_track_title";
+print "\n\${alignr}$current_track_artists";
+print "\n\${alignr}".$metadata{'xesam:album'};
+my $track_pos = $interface->Get("org.mpris.MediaPlayer2.Player", "Position");
+my $track_len = $metadata{'mpris:length'};
+print "\n\${font}".strftime("%T", gmtime($track_pos/1000000))."  \${alignr}  ".strftime("%T", gmtime($track_len/1000000));
+print "\n\${execbar ".$conky_directory."bar.sh $track_pos $track_len}";
+print "\${font :pixelsize=12}\n";
+if ($current_shuffle_status) {
+    print "Shuffling Playlist";
+} 
+print "  \${alignr}  ";
+if ($current_loop_status ne "None") {
+    print "Looping ".$current_loop_status;
+}
+print "\${color #00ff00}\${font :pixelsize=2}\n\$hr";
