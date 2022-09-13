@@ -75,9 +75,15 @@ if ($current_track_status ne "Playing") {
     print "\$color\${alignr}$current_track_status\${color #1DB954}";
 }
 print "\${font :pixelsize=2}\n\$hr\n\$font\$color";
-print "\${alignr}".substr($current_track_title, 0, 30);
+print "\${alignr}".substr($current_track_title, 0, 24);
+if (length($current_track_title) gt 24) {
+    print "\x{2026}"
+}
 print "\n\${alignr}$current_track_artists";
-print "\n\${alignr}".substr($metadata{'xesam:album'}, 0, 30);
+print "\n\${alignr}".substr($metadata{'xesam:album'}, 0, 24);
+if (length($metadata{'xesam:album'}) gt 24) {
+    print "\x{2026}"
+}
 my $track_pos = $interface->Get("org.mpris.MediaPlayer2.Player", "Position");
 my $track_len = $metadata{'mpris:length'};
 print "\n\${font}".strftime("%T", gmtime($track_pos/1000000))."  \${alignr}  ".strftime("%T", gmtime($track_len/1000000));
